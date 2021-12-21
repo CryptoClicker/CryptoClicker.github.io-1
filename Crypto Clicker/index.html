@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <title>Crypto Clicker</title>
+  <style>
+      
+   body{
+    background-color: black;
+   }
+
+   button {
+    background-color: gold;
+    font-family: 'Lato', sans-serif;
+   }
+
+   
+    h1{
+    color: gold;
+    font-family: 'Lato', sans-serif;
+   }
+
+    h3{
+    color: gold;
+    font-family: 'Lato', sans-serif;
+   }
+   
+   
+  #tm{
+     color: gold;
+     font-family: 'Lato', sans-serif;
+  }
+
+
+   #gpu{
+   width: 100px;
+   height: 75px;
+   margin-right: 350px;
+   }
+
+    #gpu2{
+   width: 100px;
+   height: 75px;
+   margin-right: 350px;
+   }
+
+    
+
+   .mover {
+    position: absolute;
+    left: 68%;
+    top: 13%;
+    width: 500px;
+    border: solid 1px gold;
+   }
+
+
+   #scorelook {
+    margin-left: 93px;
+   }
+
+   #home {
+    margin-left: 172px;
+   }
+
+   #Saver {
+    width: 200px;
+    height: 35px;
+     position: absolute;
+    left: 1%;
+    top: 11.5%;
+   }
+ 
+   #mine {
+    position: absolute;
+    left: 2%;
+    top: 11.5%;
+   }
+
+      #mine2 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 5%;
+    top: 90%;
+   }
+
+   /*code is 00111000 00110101 which is 85 in nonbinary*/
+
+   #sec {
+   width: 10px;
+    height: 10px; 
+   }
+
+
+  </style>
+</head>
+<body>
+    <br>
+    <center> 
+</div>
+  <h1>Score: <span id="score">0</span></h1>
+  <h3>Clicks Per Second: <span id="scorepersecond">0</span></h3>
+  </div>
+  <div id="coin">
+  <img src="coin.png" onclick="addToScore(1)">
+</center>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="mine">
+<h3>My Youtube</h3>
+<img src="me.jpg"  onclick="location.href='https://www.youtube.com/channel/UCnM0nscb5KZ1P0DDKy9ci1Q'" id="mine2">
+</div>
+  <div class="mover">
+  <h1>Upgrades</h1>
+  <button onclick="buyGpu()">Regular GPU[1 clicks a second][<span id="Gpucost">100</span>] -- <span id="gpus">0</span></button>
+  <br>
+  <div id="gpu">
+  <img src="gpu.png">
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <button onclick="buyGpu2()">RTX 3090[10 clicks a second][<span id="Gpucost2">1000</span>] -- <span id="gpus2">0</span></button>
+  <br>
+  <div id="gpu2">
+  <img src="gpu.png">
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <img src="sec.png" onclick="code()" id="sec">
+
+
+
+  </div>
+ 
+<script type="text/javascript">
+ let score = 0
+ let Gpucost = 100
+ let gpus = 0
+ let Gpucost2 = 1000
+ let gpus2 = 0
+ 
+
+
+const code = () => {
+  let codee = prompt("whats the code")
+  if(codee === "00111000 00110101"){
+    addToScore(1000000)
+  }
+}
+
+
+function updatescorepersecond(){
+  scorepersecond = gpus + gpus2 * 5
+  document.getElementById("scorepersecond").innerHTML = scorepersecond
+
+}
+
+
+ function addToScore(amount){
+  score = score + amount
+  document.getElementById("score").innerHTML = score
+ }
+
+ function buyGpu(){
+  if(score >= Gpucost){
+    score = score - Gpucost
+    gpus = gpus + 1
+    Gpucost = Math.round(Gpucost * 1.15)
+
+    document.getElementById("score").innerHTML = score;
+    document.getElementById("Gpucost").innerHTML = Gpucost;
+    document.getElementById("gpus").innerHTML = gpus;
+    updatescorepersecond()
+  }
+ }
+
+ setInterval(function() {
+     score = score + gpus * 1 
+     document.getElementById("score").innerHTML = score; 
+ }, 1000); 
+
+ function buyGpu2(){
+  if(score >= Gpucost2){
+    score = score - Gpucost2
+    gpus2 = gpus2 + 1
+    Gpucost2 = Math.round(Gpucost2 * 3.15)
+
+    document.getElementById("score").innerHTML = score;
+    document.getElementById("Gpucost2").innerHTML = Gpucost2;
+    document.getElementById("gpus2").innerHTML = gpus2;
+    updatescorepersecond()
+  }
+ }
+
+ setInterval(function() {
+     score = score + gpus2 * 10
+     document.getElementById("score").innerHTML = score; 
+ }, 1000); 
+
+
+
+
+</script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h6 id="tm">CurrieCoding™</h6>
+</body>
+</html>
